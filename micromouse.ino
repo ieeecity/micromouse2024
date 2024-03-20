@@ -32,12 +32,6 @@
 
 /** DEFINE OUR PINS AND WHICH COMPONENTS THEY ARE CONNECTED TO **/
 /** _______________________________________________________________________________________________________________ **/
-const int EMITTERS = 12; // EMITTERS
-const int RED_LED = 13; // RED LED AT H BRIDGE
-
-const int INDICATOR_LED_R = 6; // INDICATOR LED RIGHT 
-const int INDICATOR_LED_L = 11; // INDICATOR LED LEFT
-
 const int ENCODER_R_A = 3; // ENCODER RIGHT A (ticks first when motor forward)
 const int ENCODER_R_B = 5; // ENCODER RIGHT B (ticks first when motor backward) 
 
@@ -49,15 +43,6 @@ const int SPEED_MOTOR_R = 10; // PWM MOTOR RIGHT
 
 const int DIR_MOTOR_L = 7; // DIRECTION MOTOR LEFT 
 const int DIR_MOTOR_R = 8; // DIRECTION MOTOR RIGHT 
-
-// Directions of motors
-const int FORWARDS = 1;
-const int REVERSE = -1;
-
-// Phototransistors
-const int RIGHT_SENSOR = A0;
-const int LEFT_SENSOR = A2;
-const int MIDDLE_SENSOR = A1;
 
 // 4 Way switch and push button
 const int DIP_SWITCH = A6; 
