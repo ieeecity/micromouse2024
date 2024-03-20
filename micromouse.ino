@@ -61,12 +61,6 @@ bool switchOn;
 
 void setup() {
   Serial.begin(9600);
-  
-  pinMode(EMITTERS, OUTPUT);
-  pinMode(RED_LED, OUTPUT);
-  pinMode(INDICATOR_LED_R, OUTPUT);
-  pinMode(INDICATOR_LED_L, OUTPUT);
-
   pinMode(ENCODER_R_A, INPUT_PULLUP);
   pinMode(ENCODER_R_B, INPUT_PULLUP);
   pinMode(ENCODER_L_A, INPUT_PULLUP);
