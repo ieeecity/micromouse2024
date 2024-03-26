@@ -205,6 +205,7 @@ void motorPID(int setPoint, float kp, float ki, float kd){
 // YOUR HOMEWORK ASSIGNMENT: Create a function to convert from encoder ticks to centimeters!
 int tickConvertToCm(int encoderTicks){
   // Your code here 
+  return 0;
 }
 //==============================================================================================
 
