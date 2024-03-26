@@ -57,10 +57,11 @@ volatile int leftEncoderPos = 0; // Counts for left encoder ticks
 int prevTime = 0;
 int prevError;
 int errorIntegral;
-bool switchOn;
+bool switchOn = false;
 
 void setup() {
   Serial.begin(9600);
+  
   pinMode(ENCODER_R_A, INPUT_PULLUP);
   pinMode(ENCODER_R_B, INPUT_PULLUP);
   pinMode(ENCODER_L_A, INPUT_PULLUP);
@@ -70,6 +71,8 @@ void setup() {
   pinMode(SPEED_MOTOR_R, OUTPUT);
   pinMode(DIR_MOTOR_L, OUTPUT);
   pinMode(DIR_MOTOR_R, OUTPUT);
+
+  pinMode(DIP_SWITCH, INPUT_PULLUP); 
 
   attachInterrupt(digitalPinToInterrupt(ENCODER_L_B), readEncoderLeft, CHANGE);
   attachInterrupt(digitalPinToInterrupt(ENCODER_R_A), readEncoderRight, CHANGE);
@@ -146,6 +149,7 @@ void readEncoderRight() {
     @params dir - can either be HIGH or LOW for clockwise / counter clockwise rotation
     @params speed - analogWrite() value between 0-255
 **/
+//==============================================================================================
 void setMotors(int dir, int speed){
   analogWrite(SPEED_MOTOR_L, speed);
   analogWrite(SPEED_MOTOR_R, speed);
@@ -161,6 +165,7 @@ void setMotors(int dir, int speed){
     analogWrite(SPEED_MOTOR_R, 0);
   }
 }
+//==============================================================================================
 
 /** Function to make the robot travel for a certain amount of encoder ticks, calls upon setMotors at end
     @params dir - setPoint: The target value for how far we want to go (in encoder ticks)
@@ -195,7 +200,7 @@ void motorPID(int setPoint, float kp, float ki, float kd){
   setMotors(dir, speed);
   prevError = 0;
 }
-
+//==============================================================================================
 //==============================================================================================
 // YOUR HOMEWORK ASSIGNMENT: Create a function to convert from encoder ticks to centimeters!
 int tickConvertToCm(int encoderTicks){
@@ -203,27 +208,6 @@ int tickConvertToCm(int encoderTicks){
 }
 //==============================================================================================
 
-void loop(){
-
-  // Starter Code
-
-  int dipSwitch = analogRead(DIP_SWITCH);
-  //Serial.println(dipSwitch);
-  if(dipSwitch > 1000){
-    switchOn = true;
-  }
-
-  if(switchOn){
-    delay(500); // Wait half a second after pressing the button to actually start moving, safety first!
-    int setPoint = 1000;
-    float kp = 1;
-    float ki = 0.1;
-    float kd = 0.001;
-    motorPID(setPoint, kp, ki, kd);
-
-    Serial.print(setPoint);
-    Serial.print(" ");
-    Serial.print(rightEncoderPos);
-    Serial.println();
-  }
+void loop() {
+  // Run continuous code here
 }
