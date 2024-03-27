@@ -1,4 +1,4 @@
-/** DO NOT CHANGE THE FOLLOWING DEFINITONS - From UKMARS MazeRunner GitHub **/
+/** DO NOT CHANGE THE FOLLOWING DEFINITONS - From UKMARS MazeRunner GitHub - DO NOT WORRY ABOUT IT **/
 /** =============================================================================================================== **/
 #if defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__)
 #define __digitalPinToPortReg(P) (((P) <= 7) ? &PORTD : (((P) >= 8 && (P) <= 13) ? &PORTB : &PORTC))
@@ -29,7 +29,7 @@
 #endif
 
 /** =============================================================================================================== **/
-
+    // CODE STARTS HERE
 /** DEFINE OUR PINS AND WHICH COMPONENTS THEY ARE CONNECTED TO **/
 /** _______________________________________________________________________________________________________________ **/
 const int ENCODER_R_A = 3; // ENCODER RIGHT A (ticks first when motor forward)
@@ -43,6 +43,20 @@ const int SPEED_MOTOR_R = 10; // PWM MOTOR RIGHT
 
 const int DIR_MOTOR_L = 7; // DIRECTION MOTOR LEFT 
 const int DIR_MOTOR_R = 8; // DIRECTION MOTOR RIGHT 
+
+//____________________________________________________________________________
+const int EMITTERS = 12; // EMITTERS
+const int RED_LED = 13; // RED LED AT H BRIDGE
+
+const int INDICATOR_LED_R = 6; // INDICATOR LED RIGHT 
+const int INDICATOR_LED_L = 11; // INDICATOR LED LEFT
+
+// Phototransistors
+const int RIGHT_SENSOR = A0;
+const int LEFT_SENSOR = A2;
+const int MIDDLE_SENSOR = A1;
+
+//____________________________________________________________________________
 
 // 4 Way switch and push button
 const int DIP_SWITCH = A6; 
@@ -62,6 +76,7 @@ bool switchOn = false;
 void setup() {
   Serial.begin(9600);
   
+  //_________________MOTORS AND ENCODERS________
   pinMode(ENCODER_R_A, INPUT_PULLUP);
   pinMode(ENCODER_R_B, INPUT_PULLUP);
   pinMode(ENCODER_L_A, INPUT_PULLUP);
@@ -71,8 +86,16 @@ void setup() {
   pinMode(SPEED_MOTOR_R, OUTPUT);
   pinMode(DIR_MOTOR_L, OUTPUT);
   pinMode(DIR_MOTOR_R, OUTPUT);
+  //__________________________________________
 
   pinMode(DIP_SWITCH, INPUT_PULLUP); 
+
+  //________________LEDS_____________________
+  pinMode(EMITTERS, OUTPUT);
+  pinMode(RED_LED, OUTPUT);
+  pinMode(INDICATOR_LED_R, OUTPUT);
+  pinMode(INDICATOR_LED_L, OUTPUT);
+  //_________________________________________
 
   attachInterrupt(digitalPinToInterrupt(ENCODER_L_B), readEncoderLeft, CHANGE);
   attachInterrupt(digitalPinToInterrupt(ENCODER_R_A), readEncoderRight, CHANGE);
@@ -210,5 +233,6 @@ int tickConvertToCm(int encoderTicks){
 //==============================================================================================
 
 void loop() {
-  // Run continuous code here
+  digitalWrite(EMITTERS, HIGH);
+  Serial.println(analogRead(RIGHT_SENSOR));
 }
