@@ -407,16 +407,53 @@ void loop() {
 
       // If our sensors detect new walls, update our maze
       if(analogRead(RIGHT_SENSOR) >  sensorThreshold){
-        maze[currPos.y][currPos.x].walls[0] = true;
-        maze[currPos.y][currPos.x+1].walls[1] = true;
+        if(prevHeading == "NORTH"){
+          maze[currPos.y][currPos.x].walls[0] = true;
+          maze[currPos.y][currPos.x+1].walls[1] = true;
+        } else if(prevHeading == "EAST"){
+            maze[currPos.y][currPos.x].walls[3] = true;
+            maze[currPos.y-1][currPos.x].walls[2] = true;
+        } else if(prevHeading == "SOUTH"){
+            maze[currPos.y][currPos.x].walls[1] = true;
+            maze[currPos.y][currPos.x-1].walls[0] = true;
+        } else if(prevHeading == "WEST"){
+            maze[currPos.y][currPos.x].walls[2] = true;
+            maze[currPos.y+1][currPos.x].walls[3] = true;
+        }
+        delay(200);
       }
       if(analogRead(MIDDLE_SENSOR) >  sensorThreshold){
-        maze[currPos.y][currPos.x].walls[2] = true;
-        maze[currPos.y-1][currPos.x].walls[3] = true;
+        if(prevHeading == "NORTH"){
+          maze[currPos.y][currPos.x].walls[2] = true;
+          maze[currPos.y+1][currPos.x].walls[3] = true;
+        } else if(prevHeading == "EAST"){
+            maze[currPos.y][currPos.x].walls[1] = true;
+            maze[currPos.y][currPos.x+1].walls[0] = true;
+        } else if(prevHeading == "SOUTH"){
+            maze[currPos.y][currPos.x].walls[3] = true;
+            maze[currPos.y+1][currPos.x].walls[2] = true;
+        } else if(prevHeading == "WEST"){
+            maze[currPos.y][currPos.x].walls[1] = true;
+            maze[currPos.y][currPos.x-1].walls[2] = true;
+        }
+        delay(200);
       }
+
       if(analogRead(LEFT_SENSOR) >  sensorThreshold){
-        maze[currPos.y][currPos.x].walls[1] = true;
-        maze[currPos.y][currPos.x+1].walls[0] = true;
+        if(prevHeading == "NORTH"){
+          maze[currPos.y][currPos.x].walls[1] = true;
+          maze[currPos.y][currPos.x-1].walls[0] = true;
+        } else if(prevHeading == "EAST"){
+            maze[currPos.y][currPos.x].walls[2] = true;
+            maze[currPos.y+1][currPos.x].walls[3] = true;
+        } else if(prevHeading == "SOUTH"){
+            maze[currPos.y][currPos.x].walls[0] = true;
+            maze[currPos.y][currPos.x+1].walls[1] = true;
+        } else if(prevHeading == "WEST"){
+            maze[currPos.y][currPos.x].walls[3] = true;
+            maze[currPos.y-1][currPos.x].walls[2] = true;
+        }
+        delay(200);
       }
     
     // Check each cardinal direction's cell to see if its the lowest to move to
