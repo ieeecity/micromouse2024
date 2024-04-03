@@ -90,7 +90,6 @@ int rotateTarget = 44; // Change these to your own values for tuning
 int forwardPID[3] = {1, 2, 0}; // kp ki kd for going forwards
 int rotatePID[3] = {3, 2, 2}; // kp ki kd for rotating
 
-int FWD_COUNT = 0;
 
 /** _______________________________________________________________________________________________________________ **/
 
